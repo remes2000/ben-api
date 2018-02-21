@@ -1,0 +1,35 @@
+{
+  "name": "ben-api",
+  "version": "0.1.0",
+  "description": "Api for mathematical game called \"ben\" which is creating as my project on \"Cyborg\" competition 2018.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remes2000/ben-api.git"
+  },
+  "author": "Michal Nieruchalski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remes2000/ben-api/issues"
+  },
+  "homepage": "https://github.com/remes2000/ben-api#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.6",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.0"
+  }
+}
