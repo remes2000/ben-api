@@ -22,17 +22,20 @@ module.exports = app => {
         res.redirect('http://localhost:3000')
     })
 
-    app.post('/register', (req, res) => {
+    app.post('/register', (req, res, next) => {
 
         passport.authenticate('local-signup', (err, user, info) => {
 
-            if(err) return res.status(404).send(err)
+            if(err) return next(err)
 
             if(info) return res.status(400).send(info)
             
-            if(user) return res.send(user)
+            req.logIn(user, function(err) {
+                if (err) return next(err)
+                return res.send(user)
+            })
 
-        })(req, res)
+        })(req, res, next)
 
     })
 
@@ -45,20 +48,22 @@ module.exports = app => {
             if(info) return res.status(400).send(info)
 
             req.logIn(user, function(err) {
-                if (err) { return next(err); }
+                if (err) return next(err)
                 return res.send(user)
-            });
+            })
 
         })(req, res, next)
 
     })
 
     app.get('/logout', (req, res) => {
+        console.log(req.user)
         req.logout()
         res.redirect('http://localhost:3000')
     })
     
     app.get('/current_user', (req, res) => {
+        console.log(req.cookies)
         if(req.user)
             res.send(req.user)
         else 

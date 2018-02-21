@@ -13,6 +13,7 @@ require('./models/user')
 const app = express()
 
 app.use(cors({credentials: true, origin: true}))
+
 app.use(bodyParser.json())
 app.use(
   cookieSession({
@@ -21,11 +22,12 @@ app.use(
     keys: [keys.cookieKey]
   })
 )
+
 app.use(passport.initialize())
 app.use(passport.session()) 
 
-require('./services/passport')
 require('./routes/authRoutes')(app)
+require('./services/passport')
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {

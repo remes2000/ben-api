@@ -72,7 +72,7 @@ passport.use('local-signup', new LocalStrategy({
         else if( userWithSameUsername )
             return done(null, false, { message: 'Invalid username'} )
 
-        const newUser = await new User({'local.email': email, 'local.password': bcrypt.hashSync(password, 10)}).save()
+        const newUser = await new User({'local.email': email, 'local.username': req.body.username, 'local.password': bcrypt.hashSync(password, 10)}).save()
         done(null, newUser)
     }
 ))
