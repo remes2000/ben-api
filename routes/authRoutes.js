@@ -32,7 +32,7 @@ module.exports = app => {
             
             req.logIn(user, function(err) {
                 if (err) return next(err)
-                return res.send(user)
+                return res.send( user )
             })
 
         })(req, res, next)
@@ -49,7 +49,7 @@ module.exports = app => {
 
             req.logIn(user, function(err) {
                 if (err) return next(err)
-                return res.send(user)
+                return res.send( user )
             })
 
         })(req, res, next)
@@ -57,15 +57,14 @@ module.exports = app => {
     })
 
     app.get('/logout', (req, res) => {
-        console.log(req.user)
         req.logout()
         res.redirect('http://localhost:3000')
     })
     
     app.get('/current_user', (req, res) => {
-        console.log(req.cookies)
-        if(req.user)
+        if(req.user){
             res.send(req.user)
+        }
         else 
             res.send({})
     })
