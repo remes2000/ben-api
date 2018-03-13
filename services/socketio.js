@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = mongoose.model('users')
+const checkForAchievements = require('./checkForAchievements')
 
 module.exports = ( server, sessionMiddleware ) => {
 
@@ -242,16 +243,22 @@ module.exports = ( server, sessionMiddleware ) => {
 
 async function saveScores(players){
 
-    const winnerId = players.sort( (p1, p2) => p2.points - p1.points )[0]._id
-
+    const highScore = players.sort( (p1, p2) => p2.points - p1.points )[0].points
+    
     players.forEach( async user => {
+
         const dbUser = await User.findById(user._id)
         dbUser.points += user.points
         ++dbUser.numberOfDuels
-        ++dbUser.numberOfGames
-        if( user._id === winnerId )
+
+        if( user.points === highScore ){
             ++dbUser.wonDuels
+        }
+
+
         await dbUser.save()
+        checkForAchievements(dbUser)
+
     })
 }
 

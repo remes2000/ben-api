@@ -13,13 +13,13 @@ module.exports = app => {
     )
 
     app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-        res.redirect('http://localhost:3000')
+        res.redirect(keys.clientAppUrl)
     })
 
     app.get('/auth/facebook', passport.authenticate('facebook'))
 
     app.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => {
-        res.redirect('http://localhost:3000')
+        res.redirect(keys.clientAppUrl)
     })
 
     app.post('/register', (req, res, next) => {
@@ -58,7 +58,7 @@ module.exports = app => {
 
     app.get('/logout', (req, res) => {
         req.logout()
-        res.redirect('http://localhost:3000')
+        res.redirect(keys.clientAppUrl)
     })
     
     app.get('/current_user', (req, res) => {

@@ -9,6 +9,7 @@ const keys = require('./config/keys')
 mongoose.connect(keys.mongoURI)
 require('./models/user')
 require('./models/highScore')
+require('./models/achievement')
 
 const app = express()
 const server = require('http').createServer(app)

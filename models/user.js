@@ -13,7 +13,8 @@ const userSchema = Schema({
     points: { type: Number, default: 0 },
     numberOfGames: { type: Number, default: 0},
     numberOfDuels: { type: Number, default: 0},
-    wonDuels: { type: Number, default: 0}
+    wonDuels: { type: Number, default: 0},
+    achievements: { type: Array, default: [] }
 
 })
 

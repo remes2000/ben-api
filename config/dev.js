@@ -4,5 +4,6 @@ module.exports = {
     googleClientId: '618756412085-qcm0cg9ecmip0c2kaa8qgpv8iv8a9h0d.apps.googleusercontent.com',
     googleClientSecret: '9B0-3yDxJWRp9s6H4xe2aOhJ',
     facebookAppId: '1087913968018203',
-    facebookAppSecret: '82e28afe0623cac77b82196c06d9b944'
+    facebookAppSecret: '82e28afe0623cac77b82196c06d9b944',
+    clientAppUrl: 'http://localhost:3000'
 }

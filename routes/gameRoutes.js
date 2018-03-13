@@ -2,6 +2,7 @@ const requireLogin = require('../middlewares/requireLogin')
 const mongoose = require('mongoose')
 const User = mongoose.model('users')
 const HighScore = mongoose.model('highscores')
+const checkForAchievements = require('../services/checkForAchievements')
 
 module.exports = app => {
 
@@ -19,6 +20,7 @@ module.exports = app => {
             username: user.username
         })
         await newHighScore.save()
+        checkForAchievements(user._id)
 
         res.send(user)
     })
@@ -31,6 +33,7 @@ module.exports = app => {
         req.user.numberOfGames++
 
         const user = await req.user.save()
+        checkForAchievements(user._id)
 
         res.send(user)
     })
