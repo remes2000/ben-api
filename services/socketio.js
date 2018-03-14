@@ -250,6 +250,7 @@ async function saveScores(players){
         const dbUser = await User.findById(user._id)
         dbUser.points += user.points
         ++dbUser.numberOfDuels
+        ++dbUser.numberOfGames
 
         if( user.points === highScore ){
             ++dbUser.wonDuels
