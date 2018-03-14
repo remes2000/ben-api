@@ -19,6 +19,7 @@ module.exports = ( server, sessionMiddleware ) => {
     io.on('connection', async client => {
 
         const user = await deserializeUser(client.request.session.passport.user)
+        if(!user) return
 
         client.on('reciveListOfDuelRooms', () => {
             client.emit('listOfDuelRooms', rooms.filter( room => room.visibility) )
@@ -127,6 +128,9 @@ module.exports = ( server, sessionMiddleware ) => {
             
             const { message, roomId } = data
             const room = roomSockets.find( rs => rs.id === roomId )
+
+            if(!room) return
+
             const dataToSend = {
                 date: new Date().getTime(),
                 author: user.username,
@@ -165,7 +169,6 @@ module.exports = ( server, sessionMiddleware ) => {
         client.on('disconnectUserFromRoom', roomId => disconnectUserFromRoom(roomId))
 
         client.on('disconnect', () => {
-            //sprawdz czy jest w jakims pokoju, jezeli tak wyjeb go stamtad
             const roomSocket = roomSockets.find( rs => !!rs.sockets.find( socket => socket === client ))
             stopReciveListOfDuelRooms()
             if( roomSocket ) //disconnectUserFromRoom
