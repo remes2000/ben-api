@@ -7,6 +7,13 @@ const _ = require('lodash')
 
 module.exports = app => {
 
+    app.get('/', (req, res) => {
+        res.send(`
+            <h1>Ben Api</h1>
+            <a href="https://github.com/remes2000/ben-api">Source code</a>
+        `)
+    })
+
     app.get('/api/best_players', async (req, res) => {
         
         const users = await User.find({}, ['username', 'points', 'numberOfGames'], { sort: { points: -1 } } )
